@@ -14818,3 +14818,28 @@ async function boot(){
   });
 }
 boot();
+// Keyboard arrow navigation for scrolling line-by-line
+document.addEventListener('keydown', (event) => {
+  const activeElement = document.activeElement;
+  const isInput = activeElement.tagName === 'INPUT' || 
+                  activeElement.tagName === 'TEXTAREA' || 
+                  activeElement.isContentEditable;
+
+  if (isInput) return;
+
+  const lineHeight = 24; // Adjust to match your preferred scroll step size
+
+  if (event.key === 'ArrowUp') {
+    event.preventDefault();
+    window.scrollBy({
+      top: -lineHeight,
+      behavior: 'smooth'
+    });
+  } else if (event.key === 'ArrowDown') {
+    event.preventDefault();
+    window.scrollBy({
+      top: lineHeight,
+      behavior: 'smooth'
+    });
+  }
+});
