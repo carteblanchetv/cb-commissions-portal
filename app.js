@@ -14818,3 +14818,14 @@ async function boot(){
   });
 }
 boot();
+// Global keyboard scroll fix for production portal views
+document.addEventListener('click', (e) => {
+  const scrollable = e.target.closest('.table-outer, .ep-wrap, .ep-reg-list, .admin-wrap, .sidebar');
+  if (scrollable) {
+    if (!scrollable.hasAttribute('tabindex')) {
+      scrollable.setAttribute('tabindex', '0');
+      scrollable.style.outline = 'none';
+    }
+    scrollable.focus();
+  }
+});
